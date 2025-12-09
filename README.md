@@ -138,8 +138,8 @@ https://docs.fortinet.com/document/forticnapp/latest/administration-guide/127315
 Create a job:
 - Source Code Management -> Git -> set repo
 - Source Code Management -> Git -> Advanced -> set branch specifier
-- make sure the env variables are set
-- configure a build step
+- Make sure the env variables are set
+- Configure a build step
 - Create a Build Step (set the correct `LW_ACCOUNT`)
 ```
 #!/bin/bash
