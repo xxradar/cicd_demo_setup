@@ -121,3 +121,29 @@ ssh -i <SSH_KEY> ubuntu@EIP -L 8080:localhost:8080
 http://localhost:8080
 ```
 Paste it in the browser and finish the setup wizard, install suggested plugins, create admin user, etc.
+## Lacework Integration
+Make sure there is a configure .lacework/codesec.yaml in the repository.
+https://docs.fortinet.com/document/forticnapp/latest/administration-guide/975371/leveraging-the-codesec-yaml-file
+```
+lacework iac config generate
+```
+Follow the instructions at
+https://docs.fortinet.com/document/forticnapp/latest/administration-guide/127315/jenkins-integration
+
+Create a job:
+- configure the git repo
+- make sure the env variables are set
+- configure a build step
+
+```
+#!/bin/bash
+## Provide Lacework credentials
+echo "LW_ACCOUNT=fortinet-cse-international" > env.list 
+echo "LW_API_KEY=${LW_API_KEY}" >> env.list
+echo "LW_API_SECRET=${LW_API_SECRET}" >> env.list 
+
+## Provide Jenkins build details
+env | grep '^BRANCH_\|^CHANGE_\|^TAG_\|^BUILD_\|^JOB_\|^JENKINS_\|^GIT_' >> env.list
+
+docker run --env-file env.list -v "$(pwd):/app/src" lacework/codesec:stable lacework iac scan --directory=.
+```
