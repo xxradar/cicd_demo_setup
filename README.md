@@ -7,7 +7,7 @@
 - SSH key
 ### 2. Networking
 - Assign an EIP
-### 3.Install Docker
+### 3. Install Docker
 Docker quick install
 ```
 curl -fsSL https://get.docker.com -o get-docker.sh
