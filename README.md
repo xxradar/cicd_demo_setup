@@ -109,18 +109,19 @@ docker run --rm \
 If this prints server and client version, your TLS and certs are correct. If it fails with x509 or "certificate signed by unknown authority", something is wrong with the mount or env vars.
 
 ### 7. Access Jenkins UI
-Grab the initial admin password:
+First, grab the initial admin password:
 ```
 docker exec -it jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 ```
-For security reasons, this is not exposed
+Then connect to the UI via port-forwarding. <br>
 ```
 ssh -i <SSH_KEY> ubuntu@EIP -L 8080:localhost:8080
 ```
 ```
 http://localhost:8080
 ```
-Paste it in the browser and finish the setup wizard, install suggested plugins, create admin user, etc.
+Paste the initial password in the browser and finish the setup wizard, install suggested plugins, create admin user, etc.
+
 ## Lacework Integration
 ### Generate `.lacework/codesec.yaml`
 Make sure there is a configured `.lacework/codesec.yaml` in the repository.<br>
