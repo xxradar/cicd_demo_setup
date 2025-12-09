@@ -122,11 +122,13 @@ http://localhost:8080
 ```
 Paste it in the browser and finish the setup wizard, install suggested plugins, create admin user, etc.
 ## Lacework Integration
-Make sure there is a configure .lacework/codesec.yaml in the repository.
-https://docs.fortinet.com/document/forticnapp/latest/administration-guide/975371/leveraging-the-codesec-yaml-file
+Make sure there is a configured `.lacework/codesec.yaml` in the repository.<br>
+https://docs.fortinet.com/document/forticnapp/latest/administration-guide/975371/leveraging-the-codesec-yaml-file <br>
 ```
 lacework iac config generate
 ```
+Make sure this `.lacework/codesec.yaml` is pushed to repo.
+<br>
 Follow the instructions at
 https://docs.fortinet.com/document/forticnapp/latest/administration-guide/127315/jenkins-integration
 
@@ -134,7 +136,7 @@ Create a job:
 - configure the git repo
 - make sure the env variables are set
 - configure a build step
-
+- configure the `LW_ACCOUNT`
 ```
 #!/bin/bash
 ## Provide Lacework credentials
