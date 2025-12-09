@@ -1,4 +1,5 @@
 # cicd_demo_setup
+Feel free to reach out to access the demo system to pbogaerts.
 ## Pre-requisites
 ### 1. Infrastructure
 - AWS EC2 Ubuntu
