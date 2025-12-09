@@ -81,10 +81,9 @@ docker build -t myjenkins-blueocean:2.528.2-1 .
 ```
 This gives you a Jenkins image that has the Docker CLI and plugins you need. 
 
-5. Run Jenkins and connect it to the Docker daemon with TLS
-
+### 5. Run Jenkins and connect it to the Docker daemon with TLS
 Now run the Jenkins container:
-
+```
 docker run --name jenkins-blueocean --restart=on-failure --detach \
   --network jenkins \
   --env DOCKER_HOST=tcp://docker:2376 \
@@ -94,29 +93,11 @@ docker run --name jenkins-blueocean --restart=on-failure --detach \
   --volume jenkins-data:/var/jenkins_home \
   --volume jenkins-docker-certs:/certs/client:ro \
   myjenkins-blueocean:2.528.2-1
-
-
-Key things for the certificates:
-
---env DOCKER_HOST=tcp://docker:2376
-Jenkins will talk to the daemon at host docker (the alias from step 3), port 2376 (the TLS port). 
-Jenkins
-
---env DOCKER_CERT_PATH=/certs/client
-Inside the Jenkins container, the client certs must live under /certs/client.
-
---env DOCKER_TLS_VERIFY=1
-Tells the Docker CLI to use TLS and verify the server certificate.
-
---volume jenkins-docker-certs:/certs/client:ro
-This is the same Docker volume we created with the dind container. It contains ca.pem, cert.pem, key.pem that the Docker CLI will use.
-
-If any of these paths or volume names do not match exactly, you get TLS / cert errors.
-
-6. Check that the certs are actually there
+```
+### 6. Check that the certs are actually there
 
 Before trying Jenkins, you can verify the cert setup with a simple test container:
-
+```
 docker run --rm \
   --network jenkins \
   --env DOCKER_HOST=tcp://docker:2376 \
@@ -124,22 +105,16 @@ docker run --rm \
   --env DOCKER_TLS_VERIFY=1 \
   --volume jenkins-docker-certs:/certs/client:ro \
   docker:cli version
-
-
+```
 If this prints server and client version, your TLS and certs are correct. If it fails with x509 or "certificate signed by unknown authority", something is wrong with the mount or env vars.
 
-7. Access Jenkins UI
-
-Open:
-
-http://localhost:8080
-
-
-Then:
-
+### 7. Access Jenkins UI
 Grab the initial admin password:
-
+```
 docker exec -it jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
-
-
+```
+Open:
+```
+http://localhost:8080
+```
 Paste it in the browser and finish the setup wizard, install suggested plugins, create admin user, etc.
