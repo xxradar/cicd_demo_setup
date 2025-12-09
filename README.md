@@ -140,6 +140,10 @@ Create a job:
 - make sure the env variables are set
 - configure a build step
 - configure the `LW_ACCOUNT`
+- Source Code Management -> Git -> set repo
+- Source Code Management -> Git -> Advanced -> set branch specifier
+- Create a Build Step
+
 ```
 #!/bin/bash
 ## Provide Lacework credentials
@@ -150,5 +154,10 @@ echo "LW_API_SECRET=${LW_API_SECRET}" >> env.list
 ## Provide Jenkins build details
 env | grep '^BRANCH_\|^CHANGE_\|^TAG_\|^BUILD_\|^JOB_\|^JENKINS_\|^GIT_' >> env.list
 
-docker run --env-file env.list -v "$(pwd):/app/src" lacework/codesec:stable lacework iac scan --directory=.
+## Run Codesec against the workspace
+docker run --rm \
+  --env-file env.list \
+  -v "$PWD:/app/src" \
+  lacework/codesec:stable \
+  lacework iac scan --directory=/app/src
 ```
