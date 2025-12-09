@@ -136,14 +136,11 @@ Follow the instructions at
 https://docs.fortinet.com/document/forticnapp/latest/administration-guide/127315/jenkins-integration
 
 Create a job:
-- configure the git repo
-- make sure the env variables are set
-- configure a build step
-- configure the `LW_ACCOUNT`
 - Source Code Management -> Git -> set repo
 - Source Code Management -> Git -> Advanced -> set branch specifier
-- Create a Build Step
-
+- make sure the env variables are set
+- configure a build step
+- Create a Build Step (set the correct `LW_ACCOUNT`)
 ```
 #!/bin/bash
 ## Provide Lacework credentials
