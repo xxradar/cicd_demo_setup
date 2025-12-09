@@ -113,7 +113,10 @@ Grab the initial admin password:
 ```
 docker exec -it jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 ```
-Open:
+For security reasons, this is not exposed
+```
+ssh -i <SSH_KEY> ubuntu@EIP -L 8080:localhost:8080
+```
 ```
 http://localhost:8080
 ```
