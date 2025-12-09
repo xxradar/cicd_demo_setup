@@ -23,7 +23,7 @@ Verify Docker install
 docker run hello-world
 ```
 ## Install Jenkins
-#### 1. Make sure Docker is OK
+### 1. Make sure Docker is OK
 ```
 docker version
 docker ps
